@@ -31,6 +31,7 @@
         <Label Content="port&#xD;&#xA;" HorizontalAlignment="Left" Margin="235,198,0,0" VerticalAlignment="Top" Height="24" Width="31"/>
         <CheckBox Content="Password" HorizontalAlignment="Left" Margin="493,115,0,0" VerticalAlignment="Top"/>
         <PasswordBox HorizontalAlignment="Left" Margin="578,112,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="592,15,0,0" VerticalAlignment="Top" Click="btnBrowse_Click"/>
 
     </Grid>
 </Window>

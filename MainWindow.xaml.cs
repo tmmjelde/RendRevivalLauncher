@@ -46,15 +46,20 @@ namespace RendRevivalLauncher
         {
             RegistryKey RegKey = BaseKey;
             RegistryKey subKey = RegKey.OpenSubKey(subFolderPath);
-            if (subKey.GetValue(ValueName) != null)
+            if (subKey != null)
             {
-                return subKey.GetValue(ValueName).ToString();
-            }
-            else
+                if (subKey.GetValue(ValueName) != null)
+                {
+                    return subKey.GetValue(ValueName).ToString();
+                }
+                else
+                {
+                    return "";
+                }
+            } else
             {
                 return "";
             }
-
         }
         public MainWindow()
         {
@@ -219,7 +224,6 @@ namespace RendRevivalLauncher
             Registry_Write("server", CheckBoxserver.IsChecked.ToString());
             Registry_Write("multihome", CheckBoxmultihome.IsChecked.ToString());
             //Registry_Write("multihomeip", ComboBoxMultihomeIP.SelectedItem.ToString()); This won't work if nothing is selected in the dropdown.
-
         }
 
         private void ButtonAutodetect_Click(object sender, RoutedEventArgs e)
@@ -399,6 +403,19 @@ namespace RendRevivalLauncher
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             PipeSend(tbcustompipe.Text); 
+        }
+        // <summary>
+        // </summary>
+        // <param name="sender"></param>
+        // <param name="e"></param>
+        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "RendClient.exe|RendClient.exe";
+
+            if (openFileDialog.ShowDialog() == true)
+                TextBoxClientExeFile.Text = openFileDialog.FileName;
         }
     }
 }
