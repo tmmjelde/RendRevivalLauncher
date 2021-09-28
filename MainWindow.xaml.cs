@@ -109,6 +109,28 @@ namespace RendRevivalLauncher
                 }
             }
         }
+        public static void Update()
+        {
+            //Get list of available versions
+            //check local file hash against latest version
+            //if the hash is already latest, message user that they are up to date.
+            //if the hash is different, download the file
+            //if download success
+            //Compare hash of downloaded file against known good value
+            //rename the original file for backup with datetimestamp
+            //copy in new file
+            //another hash verification
+            //notify user the dll is updated.
+            using (NamedPipeClientStream pipeStream = new NamedPipeClientStream("PipeOwO"))
+            {
+                pipeStream.Connect();
+                using (StreamWriter sw = new StreamWriter(pipeStream))
+                {
+                    sw.AutoFlush = true;
+                    sw.WriteLine("");
+                }
+            }
+        }
         public static List<System.Net.IPAddress> DisplayIPAddresses()
         {
             List<System.Net.IPAddress> returnAddress = new List<System.Net.IPAddress>();

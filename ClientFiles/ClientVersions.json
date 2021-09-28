@@ -1,0 +1,16 @@
+﻿{
+	"ClientDLLFiles": {
+		"Original": {
+			"Hash": "5DB3D3CA91DD757B21B5FEE471E6CDECFDABD197AE9C56341A7E404635B759CC",
+			"URL": "https://github.com/tmmjelde/RendRevivalLauncher/raw/master/ClientFiles/Original/PhysX3Cooking_x64.dll"
+		},
+		"Latest": {
+			"Hash": "F1E596FFEA98D8CB63B3CA73B3F7F2E86387F3B4F3D71E1F71F3155521084340",
+			"URL": "https://github.com/tmmjelde/RendRevivalLauncher/raw/master/ClientFiles/Latest/PhysX3Cooking_x64.dll"
+		},
+		"Dev": {
+			"Hash": "F1E596FFEA98D8CB63B3CA73B3F7F2E86387F3B4F3D71E1F71F3155521084340",
+			"URL": "https://github.com/tmmjelde/RendRevivalLauncher/raw/master/ClientFiles/Dev/PhysX3Cooking_x64.dll"
+		}
+	}
+}
