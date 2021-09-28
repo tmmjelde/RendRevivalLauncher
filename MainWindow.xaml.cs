@@ -67,8 +67,8 @@ namespace RendRevivalLauncher
             ComboboxFaction.Items.Add("Revenant");
             ComboboxFaction.Items.Add("Covenant");
             ComboboxFaction.Items.Add("Order");
-            ComboboxFaction.SelectedItem = "Covenant";
-            
+            ComboboxFaction.SelectedItem = "Revenant";
+
             ComboBoxMultihomeIP.ItemsSource = DisplayIPAddresses();
             GetSettings();
         }
@@ -85,7 +85,7 @@ namespace RendRevivalLauncher
                 else if (ComboboxFaction.SelectedItem.ToString() == "Order") { launchparameters = launchparameters + " -faction=3"; }
             }
             if ((bool)CheckBoxserver.IsChecked){
-                //if (TextBoxServerIP.Text != null) { launchparameters = launchparameters + " -server=" + TextBoxServerIP.Text; }
+                if (TextBoxServerIP.Text != null) { launchparameters = launchparameters + " -connect=" + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text; }
             }
             if ((bool)CheckBoxmultihome.IsChecked)
             {
