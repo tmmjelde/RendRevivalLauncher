@@ -36,7 +36,6 @@
         <CheckBox Content="Password" HorizontalAlignment="Left" Margin="473,237,0,0" VerticalAlignment="Top"/>
         <PasswordBox HorizontalAlignment="Left" Margin="558,234,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="592,15,0,0" VerticalAlignment="Top" Click="btnBrowse_Click"/>
-        <Button Content="Patch DLL" HorizontalAlignment="Left" Margin="523,40,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
