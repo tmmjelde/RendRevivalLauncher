@@ -64,10 +64,6 @@ namespace RendRevivalLauncher
         public MainWindow()
         {
             InitializeComponent();
-            ComboboxFaction.Items.Add("Revenant");
-            ComboboxFaction.Items.Add("Covenant");
-            ComboboxFaction.Items.Add("Order");
-            ComboboxFaction.SelectedItem = "Covenant";
             
             ComboBoxMultihomeIP.ItemsSource = DisplayIPAddresses();
             GetSettings();
@@ -85,15 +81,12 @@ namespace RendRevivalLauncher
                 else if (ComboboxFaction.SelectedItem.ToString() == "Order") { launchparameters = launchparameters + " -faction=3"; }
             }
             if ((bool)CheckBoxserver.IsChecked){
-                //if (TextBoxServerIP.Text != null) { launchparameters = launchparameters + " -server=" + TextBoxServerIP.Text; }
+                if (TextBoxServerIP.Text != null) { launchparameters = launchparameters + " -connect=" + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text; }
             }
             if ((bool)CheckBoxmultihome.IsChecked)
             {
                 if (ComboBoxMultihomeIP.SelectedItem != null) { launchparameters = launchparameters + " -multihome=" + ComboBoxMultihomeIP.SelectedItem; }
             }
-            
-
-            
 
             TextBoxLaunchParameters.Text = launchparameters;
         }
@@ -395,19 +388,12 @@ namespace RendRevivalLauncher
 
         private void BtnConnect_Click(object sender, RoutedEventArgs e)
         {
-            //string<TChar> converted = "connect " + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text;
-
             PipeSend("connect " + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text);
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             PipeSend(tbcustompipe.Text); 
         }
-        // <summary>
-        // </summary>
-        // <param name="sender"></param>
-        // <param name="e"></param>
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
