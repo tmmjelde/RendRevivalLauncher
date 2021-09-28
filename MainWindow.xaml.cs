@@ -1,24 +1,14 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
 using System.IO;
+using System.IO.Pipes;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Net;
-using System.IO.Pipes;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RendRevivalLauncher
 {
@@ -31,9 +21,9 @@ namespace RendRevivalLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
-        static RegistryKey BaseKey = Registry.CurrentUser;
-        static RegistryKey HKLM = Registry.LocalMachine;
-        static string subFolderPath = "SOFTWARE\\RendRevivalLauncher";
+        static readonly RegistryKey BaseKey = Registry.CurrentUser;
+        static readonly RegistryKey HKLM = Registry.LocalMachine;
+        static readonly string subFolderPath = "SOFTWARE\\RendRevivalLauncher";
 
         //Now write Read and Write method
         public static void Registry_Write(string ValueName, string ValueData)
@@ -56,7 +46,8 @@ namespace RendRevivalLauncher
                 {
                     return "";
                 }
-            } else
+            }
+            else
             {
                 return "";
             }
@@ -76,38 +67,36 @@ namespace RendRevivalLauncher
         private void GetLaunchParameters()
         {
             string launchparameters = "";
-            if ((bool)CheckBoxNoEAC.IsChecked) { launchparameters = launchparameters + " -NoEAC"; }
-            if ((bool)CheckBoxlangame.IsChecked) { launchparameters = launchparameters + " -langame"; }
-            if ((bool)CheckBoxplayername.IsChecked) { launchparameters = launchparameters + " -playername=" + TextBoxPlayername.Text; }
-            if ((bool)CheckBoxfaction.IsChecked) {
-                if (ComboboxFaction.SelectedItem.ToString()== "Revenant"){launchparameters = launchparameters + " -faction=1";}
-                else if (ComboboxFaction.SelectedItem.ToString() == "Covenant") { launchparameters = launchparameters + " -faction=2"; }
-                else if (ComboboxFaction.SelectedItem.ToString() == "Order") { launchparameters = launchparameters + " -faction=3"; }
+            if ((bool)CheckBoxNoEAC.IsChecked) { launchparameters += " -NoEAC"; }
+            if ((bool)CheckBoxlangame.IsChecked) { launchparameters += " -langame"; }
+            if ((bool)CheckBoxplayername.IsChecked) { launchparameters += " -playername=" + TextBoxPlayername.Text; }
+            if ((bool)CheckBoxfaction.IsChecked)
+            {
+                if (ComboboxFaction.SelectedItem.ToString() == "Revenant") { launchparameters += " -faction=1"; }
+                else if (ComboboxFaction.SelectedItem.ToString() == "Covenant") { launchparameters += " -faction=2"; }
+                else if (ComboboxFaction.SelectedItem.ToString() == "Order") { launchparameters += " -faction=3"; }
             }
-            if ((bool)CheckBoxserver.IsChecked){
-                if (TextBoxServerIP.Text != null) { launchparameters = launchparameters + " -connect=" + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text; }
+            if ((bool)CheckBoxserver.IsChecked)
+            {
+                if (TextBoxServerIP.Text != null) { launchparameters += " -connect=" + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text; }
             }
             if ((bool)CheckBoxmultihome.IsChecked)
             {
-                if (ComboBoxMultihomeIP.SelectedItem != null) { launchparameters = launchparameters + " -multihome=" + ComboBoxMultihomeIP.SelectedItem; }
+                if (ComboBoxMultihomeIP.SelectedItem != null) { launchparameters += " -multihome=" + ComboBoxMultihomeIP.SelectedItem; }
             }
-            
 
-            
+
+
 
             TextBoxLaunchParameters.Text = launchparameters;
         }
         public static void PipeSend(string msg)
         {
-            using (NamedPipeClientStream pipeStream = new NamedPipeClientStream("PipeOwO"))
-            {
-                pipeStream.Connect();
-                using (StreamWriter sw = new StreamWriter(pipeStream))
-                {
-                    sw.AutoFlush = true;
-                    sw.WriteLine(msg);
-                }
-            }
+            using NamedPipeClientStream pipeStream = new ("PipeOwO");
+            pipeStream.Connect();
+            using StreamWriter sw = new (pipeStream);
+            sw.AutoFlush = true;
+            sw.WriteLine(msg);
         }
         public static void Update()
         {
@@ -121,19 +110,15 @@ namespace RendRevivalLauncher
             //copy in new file
             //another hash verification
             //notify user the dll is updated.
-            using (NamedPipeClientStream pipeStream = new NamedPipeClientStream("PipeOwO"))
-            {
-                pipeStream.Connect();
-                using (StreamWriter sw = new StreamWriter(pipeStream))
-                {
-                    sw.AutoFlush = true;
-                    sw.WriteLine("");
-                }
-            }
+            using NamedPipeClientStream pipeStream = new ("PipeOwO");
+            pipeStream.Connect();
+            using StreamWriter sw = new (pipeStream);
+            sw.AutoFlush = true;
+            sw.WriteLine("");
         }
         public static List<System.Net.IPAddress> DisplayIPAddresses()
         {
-            List<System.Net.IPAddress> returnAddress = new List<System.Net.IPAddress>();
+            List<System.Net.IPAddress> returnAddress = new();
             // Get a list of all network interfaces (usually one per network card, dialup, and VPN connection)
             NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
 
@@ -142,7 +127,7 @@ namespace RendRevivalLauncher
                 // Read the IP configuration for each network
                 IPInterfaceProperties properties = network.GetIPProperties();
 
-                if ( network.OperationalStatus == OperationalStatus.Up &&
+                if (network.OperationalStatus == OperationalStatus.Up &&
                        !network.Description.ToLower().Contains("pseudo"))
                 {
                     // Each network interface may have multiple IP addresses
@@ -157,7 +142,7 @@ namespace RendRevivalLauncher
                             continue;
 
                         returnAddress.Add(address.Address);
-                        
+
                     }
                 }
             }
@@ -211,8 +196,7 @@ namespace RendRevivalLauncher
             {
                 CheckBoxserver.IsChecked = Convert.ToBoolean(server);
             }
-            var port = Registry_Read("port");
-           
+            
             var multihome = Registry_Read("multihome");
             if (multihome != "")
             {
@@ -221,8 +205,9 @@ namespace RendRevivalLauncher
             var multihomeip = Registry_Read("multihomeip");
             if (multihomeip != "")
             {
-                if (ComboBoxMultihomeIP.Items.ToString().Contains(multihomeip.ToString())){
-                    ComboBoxMultihomeIP.SelectedItem = multihomeip; //This won't work because I can't select based on string? Dont know..
+                if (ComboBoxMultihomeIP.Items.ToString().Contains(multihomeip.ToString()))
+                {
+                    ComboBoxMultihomeIP.SelectedItem = multihomeip.ToString(); //This won't work because I can't select based on string? Dont know..
                 }
             }
             var Playernamechecked = Registry_Read("Playernamechecked");
@@ -283,7 +268,8 @@ namespace RendRevivalLauncher
             {
                 var SteamPath = subKey64.GetValue("InstallPath").ToString();
                 return SteamPath;
-            } else
+            }
+            else
             {
                 return null;
             }
@@ -316,7 +302,10 @@ namespace RendRevivalLauncher
         {
             string filename = TextBoxClientExeFile.Text;
             string Parameters = TextBoxLaunchParameters.Text;
-            var proc = System.Diagnostics.Process.Start(filename, Parameters);
+            _ = System.Diagnostics.Process.Start(filename, Parameters);
+            if ((bool)CbPassword.IsChecked) {
+                PipeSend("changepassword " + pwbPassword.Password);
+            }
         }
 
         private void CheckBoxNoEAC_Checked(object sender, RoutedEventArgs e)
@@ -417,24 +406,21 @@ namespace RendRevivalLauncher
 
         private void BtnConnect_Click(object sender, RoutedEventArgs e)
         {
-            //string<TChar> converted = "connect " + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text;
-
             PipeSend("connect " + TextBoxServerIP.Text + ":" + TextBoxServerPort.Text);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PipeSend(tbcustompipe.Text); 
+            PipeSend(tbcustompipe.Text);
         }
-        // <summary>
-        // </summary>
-        // <param name="sender"></param>
-        // <param name="e"></param>
-        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+
+        private void BtnBrowse_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "RendClient.exe|RendClient.exe";
+            OpenFileDialog openFileDialog = new()
+            {
+                InitialDirectory = "c:\\",
+                Filter = "RendClient.exe|RendClient.exe"
+            };
 
             if (openFileDialog.ShowDialog() == true)
                 TextBoxClientExeFile.Text = openFileDialog.FileName;

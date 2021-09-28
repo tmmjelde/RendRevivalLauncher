@@ -26,12 +26,14 @@
         <CheckBox x:Name="CheckBoxmultihome" Content="-multihome" HorizontalAlignment="Left" Margin="443,216,0,0" VerticalAlignment="Top" Checked="CheckBoxmultihome_Checked" Unchecked="CheckBoxmultihome_Unchecked"/>
         <ComboBox x:Name="ComboBoxMultihomeIP" HorizontalAlignment="Left" Margin="538,213,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxMultihomeIP_SelectionChanged"/>
         <Button x:Name="BtnConnect" Content="Connect" HorizontalAlignment="Left" Margin="147,257,0,0" VerticalAlignment="Top" Click="BtnConnect_Click"/>
-        <TextBox x:Name="tbcustompipe" HorizontalAlignment="Left" Margin="465,103,0,0" Text="&quot;pipe command&quot;" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <Button Content="Custompipe" HorizontalAlignment="Left" Margin="590,102,0,0" VerticalAlignment="Top" Click="Button_Click" IsEnabled="False"/>
+        <TextBox x:Name="tbcustompipe" HorizontalAlignment="Left" Margin="465,103,0,0" Text="&quot;pipe command&quot;" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Custompipe" HorizontalAlignment="Left" Margin="590,102,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Label Content="port&#xD;&#xA;" HorizontalAlignment="Left" Margin="233,212,0,0" VerticalAlignment="Top" Height="24" Width="31"/>
-        <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="592,15,0,0" VerticalAlignment="Top" Click="btnBrowse_Click"/>
+        <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="592,15,0,0" VerticalAlignment="Top" Click="BtnBrowse_Click"/>
         <Label Content="If you connect through VPN, select VPN IP" HorizontalAlignment="Left" Margin="417,183,0,0" VerticalAlignment="Top" Width="241"/>
         <Label Content="For direct connections, fill these in." HorizontalAlignment="Left" Margin="8,183,0,0" VerticalAlignment="Top" Width="240"/>
+        <PasswordBox x:Name="pwbPassword" HorizontalAlignment="Left" Margin="538,157,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="CbPassword" Content="password" HorizontalAlignment="Left" Margin="454,157,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
