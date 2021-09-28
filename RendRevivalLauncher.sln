@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendRevivalLauncher", "RendRevivalLauncher.csproj", "{FEF06E00-DD6F-4AB3-A984-11C7FB532EDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEF06E00-DD6F-4AB3-A984-11C7FB532EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF06E00-DD6F-4AB3-A984-11C7FB532EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF06E00-DD6F-4AB3-A984-11C7FB532EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF06E00-DD6F-4AB3-A984-11C7FB532EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D67C3995-229E-4582-82BB-1C53F3BCB361}
+	EndGlobalSection
+EndGlobal
